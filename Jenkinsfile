@@ -30,7 +30,6 @@ stages {
         }
         stage('Run') {
             steps {
-                
                 bat 'java main'
             }
             post {
