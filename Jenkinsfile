@@ -28,6 +28,14 @@ stages {
                 }
             }
         }
+    //
+        stage('Test') {
+            steps {
+                bat 'javac mainTest.java'
+                bat 'java mainTest'
+            }
+        }
+    //
         stage('Run') {
             steps {
                 bat 'java main'
