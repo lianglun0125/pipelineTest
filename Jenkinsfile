@@ -29,12 +29,12 @@ stages {
             }
         }
     //
-        stage('Test') {
-            steps {
-                bat 'javac mainTest.java'
-                bat 'java mainTest'
-            }
-        }
+    //    stage('Test') {
+    //        steps {
+    //            bat 'javac mainTest.java'
+    //            bat 'java mainTest'
+    //        }
+    //    }
     //
         stage('Run') {
             steps {
