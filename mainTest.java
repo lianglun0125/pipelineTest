@@ -9,6 +9,6 @@ class mainTest extends TestCase
 	{
 		main main = new main();
 		int result = main.add(2134654,465416);
-		assertEquals(result,2600070);
+		assertEquals(result,260007);
 	}
 }
