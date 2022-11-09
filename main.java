@@ -1,7 +1,7 @@
 public class main 
 {
-	public int add (int x, int y)
+	public static void main (String[]args)
 	{
-		return x+y;
+		System.out.println(1+1);
 	}
 }
