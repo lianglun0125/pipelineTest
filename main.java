@@ -1,9 +1,7 @@
 public class main 
 {
-	public int add (int a, int b) 
+	public static void main (String[]args)
 	{
-		int result = a + b;
-		System.out.println(result);
-		return result;
+		System.out.println(1+1);
 	}
 }
