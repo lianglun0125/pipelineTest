@@ -15,6 +15,19 @@ stages {
                 }
             }
         }
+        stage('Unit Test') {
+            steps {
+                bat 'java -jar junit-platform-console-standalone-1.9.1.jar -cp . --scan-classpath'
+            }
+            post {
+                failure {
+                    echo "[*] Test failure"
+                }
+                success {
+                    echo '[*] Test successful'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 bat 'javac main.java'
@@ -28,14 +41,6 @@ stages {
                 }
             }
         }
-    //
-    //    stage('Test') {
-    //        steps {
-    //            bat 'javac mainTest.java'
-    //            bat 'java mainTest'
-    //        }
-    //    }
-    //
         stage('Run') {
             steps {
                 bat 'java main'
