@@ -15,22 +15,10 @@ stages {
                 }
             }
         }
-        stage('Unit Test') {
-            steps {
-                bat 'java -jar junit-platform-console-standalone-1.9.1.jar -cp . --scan-classpath'
-            }
-            post {
-                failure {
-                    echo "[*] Test failure"
-                }
-                success {
-                    echo '[*] Test successful'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 bat 'javac main.java'
+                bat 'javac -cp .;junit-4.13.2.jar;hamcrest-core-1.3.jar CalculatorTest.java'
             }
             post {
                 failure {
@@ -41,16 +29,16 @@ stages {
                 }
             }
         }
-        stage('Run') {
+        stage('Unit Test') {
             steps {
-                bat 'java main'
+                bat 'java -cp .;junit-4.13.2.jar;hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculatorTest'
             }
             post {
                 failure {
-                    echo "[*] Running failure"
+                    echo "[*] Test failure"
                 }
                 success {
-                    echo '[*] Running successful'
+                    echo '[*] Test successful'
                 }
             }
         }
