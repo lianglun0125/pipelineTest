@@ -44,9 +44,7 @@ stages {
         }
         stage('CI finish') {
             steps {
-                echo "----------------------"
-                echo "CI finish"
-                echo "----------------------"
+                echo "[*] CI finish"
             }
         }
     }
