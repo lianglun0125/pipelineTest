@@ -46,14 +46,6 @@ stages {
             steps {
                 echo "[*] CI finish"
             }
-            post {
-                success {
-                    bat 'curl -H "Authorization: Bearer 0os5iGWwcPiXlxOsglBIY3wNV4GyXsxizSNsh048qFe" -d "message=Build Succeed" https://notify-api.line.me/api/notify'
-                }
-                failure {
-                bat 'curl -H "Authorization: Bearer 0os5iGWwcPiXlxOsglBIY3wNV4GyXsxizSNsh048qFe" -d "message=Build Failed" https://notify-api.line.me/api/notify'
-                }
-            }
         }
     }
 }
