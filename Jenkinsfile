@@ -1,3 +1,13 @@
+def notify(message) {
+    def token = "0os5iGWwcPiXlxOsglBIY3wNV4GyXsxizSNsh048qFe";
+    def jobName = env.JOB_NAME + ' - ' + env.BRANCH_NAME;
+    def buildNo = env.BUILD_NUMBER;
+      
+    def url = "https://notify-api.line.me/api/notify";
+    def lineMessage = "${jobName} [#${buildNo}] : ${message} \r\n";
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${lineMessage}'";
+}
+
 pipeline {
     agent any
 stages {
@@ -22,9 +32,11 @@ stages {
             }
             post {
                 failure {
+                    notify("failed");
                     echo "[*] Build failure"
                 }
                 success {
+                    notify("succeed");
                     echo '[*] Build successful'
                 }
             }
