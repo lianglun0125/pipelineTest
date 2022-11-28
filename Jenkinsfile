@@ -1,3 +1,13 @@
+def notifyLINE(status) {
+    def token = "0os5iGWwcPiXlxOsglBIY3wNV4GyXsxizSNsh048qFe"
+    def jobName = env.JOB_NAME +' '+env.BRANCH_NAME
+    def buildNo = env.BUILD_NUMBER
+      
+    def url = 'https://notify-api.line.me/api/notify'
+    def message = "${jobName} Build #${buildNo} ${status} \r\n"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+}
+
 pipeline {
     agent any
 stages {
@@ -19,13 +29,17 @@ stages {
             steps {
                 bat 'javac Calculator.java'
                 bat 'javac -cp .;junit-4.13.2.jar;hamcrest-core-1.3.jar CalculatorTest.java'
+                sh 'dotnet ef database update -p "Mockup.DAL/Mockup.DAL.csproj" -s "Mockup/Mockup.csproj"'
+                sh 'dotnet test "Mockup.Test/Mockup.Test.csproj"'
             }
             post {
                 failure {
                     echo "[*] Build failure"
+                    notifyLINE("succeed")
                 }
                 success {
                     echo '[*] Build successful'
+                    notifyLINE("failed")
                 }
             }
         }
