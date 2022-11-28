@@ -32,11 +32,9 @@ stages {
             }
             post {
                 failure {
-                    notify("failed");
                     echo "[*] Build failure"
                 }
                 success {
-                    notify("succeed");
                     echo '[*] Build successful'
                 }
             }
@@ -57,6 +55,14 @@ stages {
         stage('CI finish') {
             steps {
                 echo "[*] CI finish"
+            }
+        }
+        post {
+            failure {
+                notify("failed")
+            }
+            success {
+                notify("succeed")
             }
         }
     }
