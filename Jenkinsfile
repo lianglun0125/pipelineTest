@@ -18,7 +18,7 @@ stages {
         stage('Build') {
             steps {
                 sh 'javac Calculator.java'
-                sh 'javac -cp .;junit-4.13.2.jar;hamcrest-core-1.3.jar CalculatorTest.java'
+                sh 'javac -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar CalculatorTest.java'
             }
             post {
                 failure {
@@ -31,7 +31,7 @@ stages {
         }
         stage('Unit Test') {
             steps {
-                sh 'java -cp .;junit-4.13.2.jar;hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculatorTest'
+                sh 'java -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar CalculatorTest'
             }
             post {
                 failure {
