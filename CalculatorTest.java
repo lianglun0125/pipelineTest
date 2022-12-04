@@ -8,4 +8,9 @@ public class CalculatorTest {
     int sum = calculator.evaluate(1,5);
     assertEquals(6, sum);
   }
+public static void maiin(String[]args) {
+ CalculatorTest test = new CalculatorTest(); 
+  }
+
+ 
 }
